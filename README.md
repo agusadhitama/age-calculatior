@@ -35,7 +35,7 @@
 ## 📁 Struktur Project
 
 ```
-age-io/
+age-calculator/
 ├── index.html   # Markup & struktur halaman
 ├── style.css    # Semua styling + dark/light theme
 ├── script.js    # Logic kalkulasi + interaksi
@@ -55,7 +55,7 @@ Cukup buka `index.html` langsung di browser tidak perlu server, tidak perlu inst
 git clone https://github.com/agusadhitama/age-calculato.git
 
 # Masuk folder
-cd age-io
+cd age calculator
 
 # Buka di browser (atau klik 2x file index.html)
 open index.html
