@@ -1,250 +1,152 @@
 <!DOCTYPE html>
-<html lang="id" data-theme="dark">
+<html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Hitung umur kamu secara akurat dalam tahun, bulan, dan hari. Temukan zodiak, total hari, dan countdown ulang tahunmu." />
-  <meta name="author" content="Agus Satria Adhitama" />
-  <meta property="og:title" content="AGE.IO — Kamu Sudah Hidup Berapa Lama?" />
-  <meta property="og:description" content="Kalkulator umur presisi tinggi dengan desain premium." />
-  <meta name="theme-color" content="#06060a" />
-  <title>AGE.IO — Kamu Sudah Hidup Berapa Lama?</title>
-
+  <title>AGE CALCULATOR - Kamu Sudah Hidup Berapa Lama ?</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600;700;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Mono:wght@400;500&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
+<body class="dark">
 
-  <!-- ░░ CANVAS BACKGROUND ░░ -->
-  <canvas id="bgCanvas" aria-hidden="true"></canvas>
+  <div class="noise"></div>
 
-  <!-- ░░ NOISE OVERLAY ░░ -->
-  <div class="noise-overlay" aria-hidden="true"></div>
+  <div class="page">
 
-  <!-- ░░ APP SHELL ░░ -->
-  <div class="app" id="app">
-
-    <!-- ── NAVBAR ── -->
-    <nav class="navbar" role="navigation" aria-label="Main navigation">
-      <div class="nav-brand">
-        <span class="nav-logo">AGE<span class="logo-accent">.</span>IO</span>
-        <span class="nav-badge">v3.0</span>
-      </div>
-
-      <div class="nav-actions">
-        <div class="theme-switcher" id="themeSwitcher" role="group" aria-label="Pilih tema">
-          <button class="theme-btn active" data-t="dark"  aria-pressed="true"  title="Dark mode">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-          </button>
-          <button class="theme-btn" data-t="light" aria-pressed="false" title="Light mode">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-          </button>
-        </div>
-      </div>
+    <!-- NAV -->
+    <nav class="nav">
+      <div class="nav-logo">AGE CALCULATOR</div>
+      <button class="theme-toggle" id="themeBtn" title="Toggle theme">
+        <span id="themeIcon">☀️</span>
+      </button>
     </nav>
 
-    <!-- ── HERO ── -->
-    <header class="hero" role="banner">
-      <div class="hero-kicker">
-        <span class="kicker-line"></span>
-        <span class="kicker-text">Age Calculator</span>
-      </div>
-
-      <h1 class="hero-title">
-        <span class="title-row row-1">Kamu</span>
-        <span class="title-row row-2">Sudah Hidup</span>
-        <span class="title-row row-3"><em>Berapa Lama?</em></span>
+    <!-- HERO -->
+    <header class="hero">
+      <p class="eyebrow">Age Calculator //</p>
+      <h1 class="title">
+        Kamu Sudah Hidup<br>
+        <em>Berapa Lama?</em>
       </h1>
-
-      <p class="hero-desc">
-        Masukkan tanggal lahirmu dan temukan perjalanan hidupmu—<br class="br-desktop" />
-        dihitung hingga detik ini, presisi tanpa kompromi.
-      </p>
+      <p class="subtitle">Masukkan tanggal lahirmu dan temukan seberapa jauh perjalananmu.</p>
     </header>
 
-    <!-- ── MAIN CARD ── -->
-    <main class="card" id="mainCard" role="main">
+    <!-- CARD -->
+    <div class="card">
 
-      <!-- Decorative corner marks -->
-      <span class="corner tl" aria-hidden="true"></span>
-      <span class="corner tr" aria-hidden="true"></span>
-      <span class="corner bl" aria-hidden="true"></span>
-      <span class="corner br" aria-hidden="true"></span>
+      <p class="field-label">Tanggal Lahir Kamu</p>
 
-      <!-- Input Section -->
-      <section class="input-section" aria-label="Input tanggal lahir">
-        <div class="field">
-          <label class="field-label" for="dobInput">
-            <span class="label-prefix">01</span>
-            Tanggal Lahir
-          </label>
-          <div class="input-wrapper">
-            <input
-              type="date"
-              id="dobInput"
-              class="dob-input"
-              aria-label="Masukkan tanggal lahir kamu"
-              aria-describedby="inputHint"
-              autocomplete="bday"
-            />
-            <div class="input-line"></div>
-          </div>
-          <span class="input-hint" id="inputHint">Format: DD/MM/YYYY</span>
+      <div class="selects">
+        <div class="sel-wrap">
+          <select id="selD">
+            <option value="">Hari</option>
+          </select>
         </div>
-
-        <button class="calc-btn" id="calcBtn" aria-label="Hitung umur sekarang">
-          <span class="btn-label">Hitung Sekarang</span>
-          <span class="btn-icon" aria-hidden="true">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </span>
-          <span class="btn-ripple" aria-hidden="true"></span>
-        </button>
-
-        <!-- Error -->
-        <div class="error-banner" id="errorBanner" role="alert" aria-live="assertive" hidden>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-          <span id="errorText">Tanggal tidak valid.</span>
+        <div class="sel-wrap">
+          <select id="selM">
+            <option value="">Bulan</option>
+            <option value="1">Januari</option>
+            <option value="2">Februari</option>
+            <option value="3">Maret</option>
+            <option value="4">April</option>
+            <option value="5">Mei</option>
+            <option value="6">Juni</option>
+            <option value="7">Juli</option>
+            <option value="8">Agustus</option>
+            <option value="9">September</option>
+            <option value="10">Oktober</option>
+            <option value="11">November</option>
+            <option value="12">Desember</option>
+          </select>
         </div>
-      </section>
-
-      <!-- Divider -->
-      <div class="divider" id="resultDivider" aria-hidden="true" hidden>
-        <span class="divider-label">Hasil Perhitungan</span>
+        <div class="sel-wrap">
+          <select id="selY">
+            <option value="">Tahun</option>
+          </select>
+        </div>
       </div>
 
-      <!-- Result Section -->
-      <section class="result-section" id="resultSection" aria-label="Hasil umur" hidden>
+      <button class="btn" id="hitungBtn">
+        Hitung Sekarang &rarr;
+      </button>
 
-        <!-- Big Age Display -->
-        <div class="age-display" role="region" aria-label="Umur dalam tahun bulan hari">
-          <div class="age-block" id="blockTahun">
-            <div class="age-num-wrap">
-              <span class="age-num" id="numTahun" aria-label="tahun">00</span>
-            </div>
-            <span class="age-unit">Tahun</span>
-            <div class="age-track"><div class="age-fill" id="fillTahun"></div></div>
+      <div class="error" id="errMsg"></div>
+
+      <!-- RESULT -->
+      <div class="result" id="resultBox">
+
+        <div class="divider-label">Hasil Perhitungan</div>
+
+        <div class="big-nums">
+          <div class="num-block">
+            <span class="num" id="rTahun">0</span>
+            <span class="lbl">Tahun</span>
           </div>
-
-          <div class="age-sep" aria-hidden="true">
-            <span class="sep-dot"></span>
-            <span class="sep-dot"></span>
+          <span class="sep">:</span>
+          <div class="num-block">
+            <span class="num" id="rBulan">0</span>
+            <span class="lbl">Bulan</span>
           </div>
-
-          <div class="age-block" id="blockBulan">
-            <div class="age-num-wrap">
-              <span class="age-num" id="numBulan" aria-label="bulan">00</span>
-            </div>
-            <span class="age-unit">Bulan</span>
-            <div class="age-track"><div class="age-fill" id="fillBulan"></div></div>
-          </div>
-
-          <div class="age-sep" aria-hidden="true">
-            <span class="sep-dot"></span>
-            <span class="sep-dot"></span>
-          </div>
-
-          <div class="age-block" id="blockHari">
-            <div class="age-num-wrap">
-              <span class="age-num" id="numHari" aria-label="hari">00</span>
-            </div>
-            <span class="age-unit">Hari</span>
-            <div class="age-track"><div class="age-fill" id="fillHari"></div></div>
+          <span class="sep">:</span>
+          <div class="num-block">
+            <span class="num" id="rHari">0</span>
+            <span class="lbl">Hari</span>
           </div>
         </div>
 
-        <!-- Live Ticker -->
-        <div class="ticker-wrap" aria-label="Penghitung waktu hidup real-time">
-          <span class="ticker-label">Waktu hidupmu saat ini</span>
-          <div class="ticker" id="ticker" aria-live="off">
-            <span class="tick-seg" id="tickD">000000</span>
-            <span class="tick-col">d</span>
-            <span class="tick-seg" id="tickH">00</span>
-            <span class="tick-col">h</span>
-            <span class="tick-seg" id="tickM">00</span>
-            <span class="tick-col">m</span>
-            <span class="tick-seg" id="tickS">00</span>
-            <span class="tick-col">s</span>
+        <div class="ticker-box">
+          <span class="ticker-label">Waktu hidupmu detik ini</span>
+          <div class="ticker">
+            <span id="tD">0</span><small>h</small>
+            <span id="tH">00</span><small>j</small>
+            <span id="tM">00</span><small>m</small>
+            <span id="tS">00</span><small>d</small>
           </div>
         </div>
 
-        <!-- Stats Grid -->
-        <div class="stats-grid" role="list" aria-label="Statistik tambahan">
-          <article class="stat-card" role="listitem">
-            <div class="stat-head">
-              <span class="stat-icon" aria-hidden="true">📆</span>
-              <span class="stat-title">Total Hari</span>
-            </div>
-            <span class="stat-value" id="statTotalHari">—</span>
-            <span class="stat-sub">hari telah kamu jalani</span>
-          </article>
-
-          <article class="stat-card" role="listitem">
-            <div class="stat-head">
-              <span class="stat-icon" aria-hidden="true">🎂</span>
-              <span class="stat-title">Ulang Tahun</span>
-            </div>
-            <span class="stat-value" id="statNextBday">—</span>
-            <span class="stat-sub" id="statBdayLabel">hari lagi</span>
-          </article>
-
-          <article class="stat-card" role="listitem">
-            <div class="stat-head">
-              <span class="stat-icon" aria-hidden="true">🌙</span>
-              <span class="stat-title">Total Bulan</span>
-            </div>
-            <span class="stat-value" id="statTotalBulan">—</span>
-            <span class="stat-sub">bulan penuh</span>
-          </article>
-
-          <article class="stat-card" role="listitem">
-            <div class="stat-head">
-              <span class="stat-icon" aria-hidden="true">💓</span>
-              <span class="stat-title">Est. Detak Jantung</span>
-            </div>
-            <span class="stat-value" id="statJantung">—</span>
-            <span class="stat-sub">×10⁹ kali berdenyut</span>
-          </article>
-        </div>
-
-        <!-- Zodiac Card -->
-        <div class="zodiac-card" id="zodiacCard" role="region" aria-label="Informasi zodiak">
-          <div class="zodiac-left">
-            <span class="zodiac-sym" id="zodiacSym" aria-hidden="true">♈</span>
-            <div>
-              <span class="zodiac-name" id="zodiacName">—</span>
-              <span class="zodiac-dates" id="zodiacDates">—</span>
-            </div>
+        <div class="stats">
+          <div class="stat">
+            <span class="stat-val" id="sTotalHari">-</span>
+            <span class="stat-key">Total hari</span>
           </div>
-          <div class="zodiac-right">
-            <span class="zodiac-trait-label">Sifat utama</span>
-            <span class="zodiac-trait" id="zodiacTrait">—</span>
+          <div class="stat">
+            <span class="stat-val" id="sNextBday">-</span>
+            <span class="stat-key" id="sBdayLbl">Hari ke ulang tahun</span>
+          </div>
+          <div class="stat">
+            <span class="stat-val" id="sTotalBulan">-</span>
+            <span class="stat-key">Total bulan</span>
+          </div>
+          <div class="stat">
+            <span class="stat-val" id="sJantung">-</span>
+            <span class="stat-key">Miliar detak jantung</span>
           </div>
         </div>
 
-        <!-- Fun Fact -->
-        <div class="funfact" id="funfact" role="note" aria-label="Fakta menarik">
-          <span class="funfact-icon" aria-hidden="true">✦</span>
-          <span class="funfact-text" id="funfactText">—</span>
+        <div class="zodiac-box" id="zodiacBox">
+          <span class="z-sym" id="zSym">♈</span>
+          <div class="z-info">
+            <span class="z-name" id="zName">-</span>
+            <span class="z-dates" id="zDates">-</span>
+            <span class="z-trait" id="zTrait">-</span>
+          </div>
         </div>
 
-      </section>
-    </main>
+        <div class="funfact" id="funfact">-</div>
 
-    <!-- ── FOOTER ── -->
-    <footer class="footer" role="contentinfo">
-      <div class="footer-credit">
-        <span class="credit-meta">Crafted with precision by</span>
-        <span class="credit-name">Agus Satria Adhitama</span>
       </div>
-      <div class="footer-right">
-        <span class="footer-tag">No framework. Just craft.</span>
-        <span class="footer-copy">© 2025</span>
-      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <span class="credit-by">Crafted by</span>
+      <span class="credit-name">Agus Satria Adhitama</span>
+      <span class="credit-tag">No framework. Just craft.</span>
     </footer>
 
-  </div><!-- /app -->
+  </div>
 
   <script src="script.js"></script>
 </body>
