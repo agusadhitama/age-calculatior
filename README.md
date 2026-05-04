@@ -20,7 +20,7 @@
 
 ## 🚀 Demo
 
-🔗 **[Live Demo](https://agusadhitama.github.io/age-calculator)**
+🔗 **[LIVE DEMO](https://agusadhitama.github.io/age-calculator)**
 
 ---
 
