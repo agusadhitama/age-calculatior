@@ -18,14 +18,6 @@
 
 ---
 
-## 🖥️ Preview
-
-| Dark Mode | Light Mode |
-|-----------|------------|
-| ![Dark](https://via.placeholder.com/400x250/08080d/c8f135?text=Dark+Mode) | ![Light](https://via.placeholder.com/400x250/f0efe9/2d6e00?text=Light+Mode) |
-
----
-
 ## 🚀 Demo
 
 🔗 **[Live Demo](https://agusadhitama.github.io/age-calculator)**
